@@ -36,3 +36,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 
 
 Route::resource('teachers', 'TeachersController');
+
+Route::resource('courses', 'CoursesController');

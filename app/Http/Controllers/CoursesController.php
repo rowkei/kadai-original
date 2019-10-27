@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Teacher;
+use App\Course;
 
-class TeachersController extends Controller
+class CoursesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,10 @@ class TeachersController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::all();
+        $courses = Course::all();
         
-        return view('teachers.index', [
-            'teachers' => $teachers,
+        return view('courses.index', [
+            'courses' => $courses,
         ]);
     }
 
@@ -29,10 +29,10 @@ class TeachersController extends Controller
      */
     public function create()
     {
-        $teacher = new Teacher;
+        $course = new Course;
         
-        return view('teachers.create', [
-            'teacher'=> $teacher,
+        return view('courses.create',[
+            'course' => $course,
         ]);
     }
 
@@ -44,11 +44,12 @@ class TeachersController extends Controller
      */
     public function store(Request $request)
     {
-        $teacher = new Teacher;
-        $teacher-> name = $request->name;
-        $teacher->save();
+        $course = new Course;
+        $course->name = $request->name;
+        $course->save();
         
-        return redirect('/teachers');
+        return redirect('/courses');
+        
     }
 
     /**
@@ -59,10 +60,10 @@ class TeachersController extends Controller
      */
     public function show($id)
     {
-        $teacher = Teacher::find($id);
+        $course = Course::find($id);
         
-        return view('teachers.show', [
-            'teacher' => $teacher,    
+        return view('courses.show', [
+            'course' => $course,
         ]);
     }
 
@@ -74,12 +75,11 @@ class TeachersController extends Controller
      */
     public function edit($id)
     {
-        $teacher = Teacher::find($id);
+        $course = Course::find($id);
         
-        return view('teachers.edit', [
-            'teacher' => $teacher,
+        return view('courses.edit', [
+            'course' => $course,
         ]);
-        
     }
 
     /**
@@ -91,12 +91,11 @@ class TeachersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $teacher = Teacher::find($id);
-        $teacher->name = $request->name;
-        $teacher->save();
+        $course = Course::find($id);
+        $course->name = $request->name;
+        $course->save();
         
-        return redirect('/teachers');
-        
+        return redirect('/courses');
     }
 
     /**
@@ -107,9 +106,9 @@ class TeachersController extends Controller
      */
     public function destroy($id)
     {
-        $teacher = Teacher::find($id);
-        $teacher->delete();
+        $course = Course::find($id);
+        $course->delete();
         
-        return redirect('/teachers');
+        return redirect('/courses');
     }
 }
