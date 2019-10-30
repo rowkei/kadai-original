@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>{{ $teacher -> name}}　詳細</h1>
+    <h1>{{ $teacher->name}}　詳細</h1>
     
     <table class="table table-bordered">
         <tr>
@@ -10,7 +10,9 @@
         </tr>
         <tr>
             <th>担当コース</th>
-            <td>修正中</td>
+            @foreach ($courses as $course)
+            <td>{{ $course->name }}</td>
+            @endforeach
         </tr>
     </table>
     

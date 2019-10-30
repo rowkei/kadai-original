@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Teacher;
+use App\Course;
 
 class TeachersController extends Controller
 {
@@ -16,9 +17,11 @@ class TeachersController extends Controller
     public function index()
     {
         $teachers = Teacher::all();
+        //$courses = $teachers->teach_courses;
         
         return view('teachers.index', [
             'teachers' => $teachers,
+        //    '$courses' => $courses,
         ]);
     }
 
@@ -31,8 +34,11 @@ class TeachersController extends Controller
     {
         $teacher = new Teacher;
         
+        $courses = Course::all();
+        
         return view('teachers.create', [
             'teacher'=> $teacher,
+            'courses'=> $courses,
         ]);
     }
 
@@ -47,6 +53,9 @@ class TeachersController extends Controller
         $teacher = new Teacher;
         $teacher-> name = $request->name;
         $teacher->save();
+        $courses = $request->courses;
+        $teacher->teach($courses);
+        
         
         return redirect('/teachers');
     }
@@ -60,9 +69,11 @@ class TeachersController extends Controller
     public function show($id)
     {
         $teacher = Teacher::find($id);
+        $courses = $teacher->teach_courses;
         
         return view('teachers.show', [
-            'teacher' => $teacher,    
+            'teacher' => $teacher,
+            'courses' => $courses,
         ]);
     }
 
@@ -75,9 +86,11 @@ class TeachersController extends Controller
     public function edit($id)
     {
         $teacher = Teacher::find($id);
+        $courses = Course::all();
         
         return view('teachers.edit', [
             'teacher' => $teacher,
+            'courses' => $courses,
         ]);
         
     }
@@ -94,6 +107,8 @@ class TeachersController extends Controller
         $teacher = Teacher::find($id);
         $teacher->name = $request->name;
         $teacher->save();
+        $courses = $request->courses;
+        $teacher->teach($courses);
         
         return redirect('/teachers');
         

@@ -10,10 +10,16 @@
                 <div class="form-group">
                     {!! Form::label('name', '名前:') !!}
                     {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                    
+                    @foreach($courses as $course)
+                        {!! Form::checkbox('courses[]',$course->id) !!}
+                        {!! $course->name !!}
+                    @endforeach
+                    
                 </div>
         
                 {!! Form::submit('登録', ['class' => 'btn btn-primary']) !!}
-        
+                
             {!! Form::close() !!}
         </div>
     </div>

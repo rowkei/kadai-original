@@ -15,7 +15,9 @@
                 @foreach ($teachers as $teacher)
                 <tr>
                     <td>{!! link_to_route('teachers.show', $teacher->name, ['id' => $teacher->id]) !!}</td>
-                    <td>修正中</td>
+                    @foreach ($teacher->teach_courses as $course)
+                        <td>{{ $course->name }}</td>
+                    @endforeach
                 </tr>
                 @endforeach
             </tbody>
