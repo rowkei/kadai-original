@@ -38,3 +38,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 Route::resource('teachers', 'TeachersController');
 
 Route::resource('courses', 'CoursesController');
+
+Route::resource('lessons', 'LessonsController');
+
+Route::group(['middleware' => ['auth']], function() {
+   Route::get('reserve', 'UsersController@reserve')->name('user.reserve'); 
+});

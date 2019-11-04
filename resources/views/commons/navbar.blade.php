@@ -10,6 +10,7 @@
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
                 @if (Auth::check())
+                    <li class="dropdown-item">{!! link_to_route('user.reserve', '予約する') !!}</li>
                     <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
                 @else
                     <li class="nav-item">{!! link_to_route('signup.get', 'ユーザー登録', [], ['class' => 'nav-link']) !!}</li>

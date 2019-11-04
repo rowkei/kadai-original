@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>id: {{ $teacher->name }} 編集</h1>
+    <h1>{{ $teacher->name }} 編集</h1>
 
     <div class="row">
         <div class="col-6">

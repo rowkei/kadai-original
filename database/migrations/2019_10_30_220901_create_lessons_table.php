@@ -15,6 +15,10 @@ class CreateLessonsTable extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('teacher_id')->unsigned()->index();
+            $table->integer('course_id')->unsigned()->index();
+            $table->date('lesson-date');
+            $table->time('lesson-time');
             $table->timestamps();
         });
     }

@@ -17,4 +17,9 @@ class Teacher extends Model
         $this->teach_courses()->sync($courseId);
     }
     
+    public function teach_lessons()
+    {
+        return $this->belongsToMany(Lesson::class, 'teacher_lesson', 'teacher_id', 'lesson_id')->withTimestamps();
+    }
+    
 }
