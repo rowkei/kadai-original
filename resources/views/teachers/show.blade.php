@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_admin')
 
 @section('content')
     <h1>{{ $teacher->name}}　詳細</h1>

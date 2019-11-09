@@ -2,7 +2,16 @@
 
 @section('content')
     @if (Auth::check())
-        {{ Auth::user()->name }}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>{!! link_to_route('admin.home', 'レッスン一覧') !!}</th>
+                    <th>{!! link_to_route('teachers.index', '講師一覧') !!}</th>
+                    <th>{!! link_to_route('courses.index', 'コース一覧') !!}</th>
+                </tr>
+            </thead>
+        </table>
+        @include('lessons.index')
     @else
         <div class="center jumbotron">
             <div class="text-center">

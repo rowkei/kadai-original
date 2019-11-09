@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;  // Adminを追加
  
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
- 
+
+use App\Lesson;
+
 class HomeController extends Controller
 {
     /**
@@ -24,6 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');  //変更
+        $lessons = Lesson::orderBy('lesson_date','asc')->get();
+        return view('admin.home',[
+            'lessons' => $lessons,
+        ]);  //変更
+        
     }
 }

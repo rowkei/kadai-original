@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app_admin')
 
 @section('content')
+    
     <h1>コース登録</h1>
     
     <div class="row">

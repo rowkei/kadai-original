@@ -44,11 +44,15 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|max:191',
+        ]);
+        
         $course = new Course;
         $course->name = $request->name;
         $course->save();
         
-        return redirect('/courses');
+        return redirect('/admin/courses');
         
     }
 
@@ -91,11 +95,15 @@ class CoursesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required|max:191',
+        ]);
+        
         $course = Course::find($id);
         $course->name = $request->name;
         $course->save();
         
-        return redirect('/courses');
+        return redirect('/admin/courses');
     }
 
     /**
@@ -109,6 +117,6 @@ class CoursesController extends Controller
         $course = Course::find($id);
         $course->delete();
         
-        return redirect('/courses');
+        return redirect('/admin/courses');
     }
 }

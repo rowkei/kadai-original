@@ -48,6 +48,11 @@ class TeachersController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'courses' => 'required',
+        ]);
+        
         $teacher = new Teacher;
         $teacher-> name = $request->name;
         $teacher->save();
@@ -55,7 +60,7 @@ class TeachersController extends Controller
         $teacher->teach($courses);
         
         
-        return redirect('/teachers');
+        return redirect('/admin/teachers');
     }
 
     /**
@@ -102,13 +107,18 @@ class TeachersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'courses' => 'required',
+        ]);
+        
         $teacher = Teacher::find($id);
         $teacher->name = $request->name;
         $teacher->save();
         $courses = $request->courses;
         $teacher->teach($courses);
         
-        return redirect('/teachers');
+        return redirect('/admin/teachers');
         
     }
 
@@ -123,6 +133,6 @@ class TeachersController extends Controller
         $teacher = Teacher::find($id);
         $teacher->delete();
         
-        return redirect('/teachers');
+        return redirect('/admin/teachers');
     }
 }

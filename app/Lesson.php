@@ -26,4 +26,14 @@ class Lesson extends Model
         $this->entry_teachers()->attach($teacherId);
     }
     
+    public function reserved($userId)
+    {
+        $this->reserve_users()->attach($userId);
+    }
+    
+    public function cancel($userId)
+    {
+        $this->reserve_users()->detach($userId);
+    }
+    
 }

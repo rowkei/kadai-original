@@ -13,8 +13,8 @@ class LessonsController extends Controller
 {
     public function index()
     {
-        $lessons = Lesson::all();
-        
+        $lessons = Lesson::orderBy('lesson_date','asc')->get();
+
         return view('lessons.index', [
             'lessons' => $lessons,    
         ]);
@@ -24,7 +24,6 @@ class LessonsController extends Controller
     {
         $lesson = new Lesson;
         $teacher = Teacher::find($request->teacher_id);
-        //$course = $teacher->courses()->name;
         
         $teachers = Teacher::select('id', 'name') ->get();
         $teacher_id_loop = $teachers->pluck('name','id');
@@ -53,6 +52,12 @@ class LessonsController extends Controller
     
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'lesson_date' => 'required',
+            'lesson_time' => 'required',
+            'course_id' => 'required',
+        
+        ]);
         
         $lesson = new Lesson;
         $lesson->teacher_id = $request->teacher_id;
@@ -62,7 +67,7 @@ class LessonsController extends Controller
         $lesson->save();
         $lesson->entry($lesson->teacher_id);
         
-        return redirect('/lessons');
+        return redirect('/admin/home');
     }
     
     public function show($id)
@@ -96,13 +101,20 @@ class LessonsController extends Controller
     
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'lesson_date' => 'required',
+            'lesson_time' => 'required',
+            'course_id' => 'required',
+        
+        ]);
+        
         $lesson = Lesson::find($id);
         $lesson->course_id = $request->course_id;
         $lesson->lesson_date = $request->lesson_date;
         $lesson->lesson_time = $request->lesson_time;
         $lesson->save();
         
-        return redirect('/lessons');
+        return redirect('/admin/home');
     }
     
     public function destroy($id)
@@ -110,7 +122,7 @@ class LessonsController extends Controller
         $lesson = Lesson::find($id);
         $lesson->delete();
         
-        return redirect('/lessons');
+        return redirect('/admin/home');
     }
     
 }

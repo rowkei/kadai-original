@@ -32,15 +32,21 @@ Route::group(['prefix' => 'admin'], function() {
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::get('logout',   'Admin\LoginController@logout')->name('admin.logout');
     Route::get('home',      'Admin\HomeController@index')->name('admin.home');
+    Route::resource('lessons', 'LessonsController');
+    Route::resource('teachers', 'TeachersController');
+    Route::resource('courses', 'CoursesController');
 });
 
 
-Route::resource('teachers', 'TeachersController');
 
-Route::resource('courses', 'CoursesController');
 
-Route::resource('lessons', 'LessonsController');
+
+
+
 
 Route::group(['middleware' => ['auth']], function() {
    Route::get('reserve', 'UsersController@reserve')->name('user.reserve'); 
+   Route::put('reserve/{id?}', 'UsersController@apply')->name('user.apply');
+   Route::get('/', 'UsersController@index')->name('user.index');
+   Route::put('reserved/{id}', 'UsersController@cancel')->name('user.cancel');
 });
