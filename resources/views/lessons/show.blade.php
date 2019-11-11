@@ -24,7 +24,13 @@
         </tr>
         <tr>
             <th>生徒</th>
-            <td>生徒名を表示</td>
+            @if(is_null($lesson->user_id))
+                <td>未予約</td>
+            @else
+                @foreach ($lesson->reserve_users as $user)
+                    <td>{!! $user->name !!}</td>
+                @endforeach
+            @endif
         </tr>
     </table>
     

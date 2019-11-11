@@ -19,14 +19,15 @@
                 @foreach ($lesson->entry_teachers as $teacher)
                 <td>{!! $teacher->name !!}</td>
                 @endforeach
-                @foreach ($lesson->reserve_users as $user)
+                
                 @if(is_null($lesson->user_id))
                     <td>未予約</td>
                 @else
-                    <td>{!! $user->name !!}</td>
+                    @foreach ($lesson->reserve_users as $user)
+                        <td>{!! $user->name !!}</td>
+                    @endforeach
                 @endif
-                @endforeach
-                <td>{!! link_to_route('lessons.show', '詳細', ['id' => $lesson->id]) !!}</td>>
+                <td>{!! link_to_route('lessons.show', '詳細', ['id' => $lesson->id]) !!}</td>
             </tr>
             @endforeach
         </tbody>
@@ -34,4 +35,4 @@
 @endif    
 
 {!! link_to_route('lessons.create', 'レッスン登録',[],['class' => 'btn btn-primary']) !!}
-    
+

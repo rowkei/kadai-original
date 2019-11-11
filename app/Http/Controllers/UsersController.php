@@ -43,7 +43,7 @@ class UsersController extends Controller
     public function index()
     {
         $user = User::find(Auth::id());
-        $lessons = $user->lessons;
+        $lessons = $user->lessons()->orderBy('lesson_date','asc')->get();
         return view('welcome',[
             'lessons'=> $lessons,
         ]);
